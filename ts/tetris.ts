@@ -268,14 +268,18 @@ module Tetris {
 
         constructor(canvasID: string) {
             let c = <HTMLCanvasElement>document.getElementById("myCanvas")
-            let that = this
+
             this._ctx = c.getContext("2d")
 
 
             // register events
-            document.onkeydown = (key: KeyboardEvent) => {
-                that.onkeydown(key)
-            }
+            // let that = this
+            // document.onkeydown = (key: KeyboardEvent) => {
+            //     that.onkeydown(key)
+            // }
+
+            /** alternative way */
+            document.onkeydown = this.onkeydown.bind(this)
         }
 
         initWith(size: number[]) {
@@ -293,14 +297,14 @@ module Tetris {
             this._game.render(this)
         }
 
-        private static _startTxt = 'Start : Enter' 
+        private static _startTxt = 'Start : Enter'
         private stopScreen() {
             this._ctx.fillStyle = '#000000'
             this._ctx.fillRect(0, 0, this._ctx.canvas.width, this._ctx.canvas.height)
             this._ctx.fillStyle = '#AAAAAA'
             this._ctx.font = 'italic 40pt Calibri'
             let size = this._ctx.measureText(GameMain._startTxt);
-            this._ctx.fillText(GameMain._startTxt, (this._ctx.canvas.width - size.width)/2, this._ctx.canvas.height*1/3) 
+            this._ctx.fillText(GameMain._startTxt, (this._ctx.canvas.width - size.width) / 2, this._ctx.canvas.height * 1 / 3)
         }
         draw() {
             if (!this._game.isPlaying) {

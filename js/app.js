@@ -253,12 +253,14 @@ var Tetris;
         function GameMain(canvasID) {
             this._dropInterval = Math.floor(1000 / 1.5);
             var c = document.getElementById("myCanvas");
-            var that = this;
             this._ctx = c.getContext("2d");
             // register events
-            document.onkeydown = function (key) {
-                that.onkeydown(key);
-            };
+            // let that = this
+            // document.onkeydown = (key: KeyboardEvent) => {
+            //     that.onkeydown(key)
+            // }
+            /** alternative way */
+            document.onkeydown = this.onkeydown.bind(this);
         }
         GameMain.prototype.initWith = function (size) {
             this._ctx.canvas.width = size[0];
